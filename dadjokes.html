@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Dad Jokes</title>
+</head>
+
+<body class="flex bg-slate-200 items-center justify-center">
+  <main class="flex flex-col">
+    <div id="container-block" class="flex w-[550px]  bg-white h-[600px] rounded-[20px] shadow-lg flex-col mt-40">
+      <h1 class="flex justify-center mt-10 font-semibold text-4xl ">Laugh With Dad</h1>
+      <div id="line" class="w-[550px] border-black border-[1px] opacity-[15%] mt-4 h-[1px]"></div>
+      <div id="speaker" class="flex flex-row gap-2 space-y-4 mt-10">
+        <div class="flex flex-row text-5xl ml-10 mt-4">🗣️</div>
+        <p id="mainline" class="flex flex-row mt-10 text-2xl"></p>
+      </div>
+      <div id="listener" class="flex items-center justify-center mt-10">
+        <button id="mainquestion"
+          class="flex bg-blue-500 p-4 text-xl text-white font-semibold rounded-lg shadow-lg hover:bg-slate-800"></button>
+      </div>
+      <div id="answer" class="flex flex-row gap-2 space-y-4 mt-6">
+        <div class="flex flex-row text-5xl ml-10 mt-4">🗣️</div>
+        <p id="punchline" class="flex flex-row align-middle items-center text-2xl"></p>
+      </div>
+
+      <div id="next-one-button" class="flex flex-col items-center justify-center mt-20">
+        <button
+          class="flex flex-row items-center justify-center p-4 text-2xl text-white font-bold rounded-lg shadow-lg w-72  place-content-center bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-40% to-emerald-600 to-90%">Next
+          One</button>
+      </div>
+    </div>
+  </main>
+  <script>
+    const jokes = [
+      "I tried to catch some fog yesterday.",
+      "Did you hear about the restaurant on the moon?",
+      "I told my wife she was drawing her eyebrows too high.",
+      "I tried to start a hot air balloon business.",
+      "I told my wife she was drawing her eyebrows too high.",
+      "I tried to sue the airline for losing my luggage.",
+      "I told my wife she was drawing her eyebrows too high.",
+      "I tried to catch some fog yesterday.",
+      "I told my wife she was drawing her eyebrows too high.",
+      "I tried to start a hot air balloon business."
+    ];
+
+    const questions = [
+      "How'd that go?",
+      "No, what about it?",
+      "What did she say?",
+      "How'd that go?",
+      "What did she say?",
+      "What happened?",
+      "What did she say?",
+      "How'd that go?",
+      "What did she say?",
+      "How'd that go?"
+    ];
+
+    const punchlines = [
+      "I mist.",
+      "Great food, no atmosphere.",
+      "She seemed surprised.",
+      "It never took off.",
+      "She seemed surprised.",
+      "I lost my case.",
+      "She seemed surprised.",
+      "I mist.",
+      "She seemed surprised.",
+      "It never took off."
+    ];
+
+    // Combine jokes, questions, and punchlines into an array of objects
+    const jokesPairs = jokes.map((joke, index) => {
+      return {
+        joke: joke,
+        question: questions[index],
+        punchline: punchlines[index]
+      };
+    });
+
+    const jokeElement = document.getElementById('mainline');
+    const questionLine = document.getElementById('mainquestion');
+    const punchLineElement = document.getElementById('punchline');
+    const answerBlock = document.getElementById('answer')
+
+    function displayRandomJokes() {
+      const randomIndex = Math.floor(Math.random() * jokesPairs.length);
+      const randomJoke = jokesPairs[randomIndex];
+
+      jokeElement.textContent = randomJoke.joke;
+      questionLine.textContent = randomJoke.question;
+      punchLineElement.textContent = randomJoke.punchline;
+
+      answerBlock.classList.add('hidden')
+    }
+
+    // Display a random joke when the page loads
+    document.addEventListener("DOMContentLoaded", displayRandomJokes);
+
+    questionLine.addEventListener("click", function() {
+      answerBlock.classList.remove('hidden');
+    })
+
+    // Display a new random joke when the "Next One" button is clicked
+    document.getElementById('next-one-button').addEventListener('click', displayRandomJokes);
+  </script>
+</body>
+
+</html>
